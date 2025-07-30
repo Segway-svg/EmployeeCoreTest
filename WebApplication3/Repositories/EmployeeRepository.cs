@@ -39,7 +39,7 @@ namespace WebApplication3.Repositories
 
             await EnsureConnectionOpenAsync();
 
-            var addedRow = await _connection.ExecuteScalarAsync<int>(sql, new
+            await _connection.ExecuteScalarAsync<int>(sql, new
             {
                 employee.Name,
                 employee.Surname,
@@ -51,14 +51,9 @@ namespace WebApplication3.Repositories
                 DepartmentPhone = employee.Department?.Phone
             });
 
-            if (addedRow > 0) 
-            { 
-                var employeeId = await _connection.ExecuteScalarAsync<int>("SELECT TOP 1 * FROM Employees ORDER BY Id DESC");
+            var employeeId = await _connection.ExecuteScalarAsync<int>("SELECT TOP 1 * FROM Employees ORDER BY Id DESC");
 
-                return employeeId;
-            }
-
-            return null;
+            return employeeId;
         }
 
         public async Task<bool> DeleteEmployeeAsync(int id)
