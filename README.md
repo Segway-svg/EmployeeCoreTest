@@ -4,11 +4,14 @@
 
 <img width="1689" height="398" alt="image" src="https://github.com/user-attachments/assets/dd67eb10-dac8-4a57-b40d-28e26cce33be" />
 
-Первый запрос (Create), в отличии от остальных (с реквестом и репозиторием) содержит в себе доп. функционал для демонстрации разных навыков, а именно:
+Первый запрос (Create), в отличии от остальных (с реквестом и репозиторием) содержит в себе доп. функционал для демонстрации имеющихся навыков, а именно:
 1) Маппер
 2) Класс для респонса OperationResultResponse<T>
 3) Валидатор
 5) Команда (обёртка для респонса, валидации и выполнения запроса)
+
+<img width="603" height="685" alt="image" src="https://github.com/user-attachments/assets/786ce72a-6b82-4b5f-adb4-d9ffe9f9214f" />
+
 
 Пример успешного запроса:
 <img width="1615" height="510" alt="image" src="https://github.com/user-attachments/assets/ac7a9da4-0e54-48ae-b7d3-fc62a3f38f02" />
