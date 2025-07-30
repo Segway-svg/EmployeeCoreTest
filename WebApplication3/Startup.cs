@@ -1,6 +1,7 @@
-﻿using Microsoft.Data.SqlClient;
-using WebApplication3.Commands;
-using WebApplication3.Mappers;
+﻿using WebApplication3.Commands;
+using WebApplication3.Db;
+using WebApplication3.Mappers.CreateMapper;
+using WebApplication3.Mappers.EditMapper;
 using WebApplication3.Repositories;
 using WebApplication3.Validators;
 
@@ -22,23 +23,25 @@ namespace WebApplication3
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
 
-            services.AddTransient(_ =>
-                new SqlConnection(
-                    Configuration.GetConnectionString("DefaultConnection") ??
-                    "Server=localhost\\SQLEXPRESS;Database=master;Trusted_Connection=True;TrustServerCertificate=True;"
-                )
-            );
+            services.Configure<DbSettings>(Configuration.GetSection("DatabaseSettings"));
+            services.AddTransient<DbConnection>();
+            services.AddTransient(provider =>
+                provider.GetRequiredService<DbConnection>().CreateConnection());
 
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+
             services.AddScoped<ICreateEmployeeCommand, CreateEmployeeCommand>();
-            services.AddScoped<IDbEmployeeMapper, DbEmployeeMapper>();
-            services.AddScoped<ICreateEmployeeCommand, CreateEmployeeCommand>();
+            services.AddScoped<IEditEmployeeCommand, EditEmployeeCommand>();
+
+            services.AddScoped<IDbCreateEmployeeMapper, DbCreateEmployeeMapper>();
+            services.AddScoped<IDbEditEmployeeMapper, DbEditEmployeeMapper>();
+
             services.AddScoped<ICreateEmployeeValidator, CreateEmployeeRequestValidator>();
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void ConfigureServices(WebApplication app)
         {
-            if (env.IsDevelopment())
+            if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
@@ -48,10 +51,7 @@ namespace WebApplication3
             app.UseRouting();
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app.MapControllers();
         }
     }
 }
