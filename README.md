@@ -31,21 +31,7 @@
 
 Структура таблицы для теста:
 
-CREATE TABLE Employees (
-    Id INT PRIMARY KEY IDENTITY(1,1),
-    Name NVARCHAR(100) NOT NULL,
-    Surname NVARCHAR(100) NOT NULL,
-    Phone NVARCHAR(20),
-    CompanyId INT NOT NULL,
-    DepartmentName NVARCHAR(100),
-    DepartmentPhone NVARCHAR(20),
-    PassportType NVARCHAR(50),
-    PassportNumber NVARCHAR(50)
-);
-
-На данный момент переделываю к более нормализованному виду:
-
-CREATE TABLE Employees (
+CREATE TABLE EmployeesDb (
     Id INT PRIMARY KEY IDENTITY(1,1),
     Name NVARCHAR(100) NOT NULL,
     Surname NVARCHAR(100) NOT NULL,
@@ -57,8 +43,23 @@ CREATE TABLE Employees (
     CONSTRAINT FK_Employee_Department_Db FOREIGN KEY (DepartmentId) REFERENCES Departments(Id)
 );
 
-CREATE TABLE Departments (
+CREATE TABLE DepartmentsDb (
     Id INT PRIMARY KEY,
     Name NVARCHAR(100) NOT NULL,
     Phone NVARCHAR(20)
 );
+
+INSERT INTO Departments(Id, Name, Phone)
+            VALUES (1, 'RABBIT', '123');
+
+INSERT INTO DepartmentsDb(Name, Phone)
+            VALUES ('KAFKA', '123');
+
+            
+INSERT INTO EmployeesDb (Name, Surname, Phone, CompanyId, DepartmentId, PassportType, PassportNumber)
+            VALUES ('Сергей', 'Сес', '+7914', 5, 4, 'Rus', 123);
+
+select * from EmployeesDb as emp
+join DepartmentsDb dep on emp.DepartmentId = dep.Id
+
+select * from DepartmentsDb
