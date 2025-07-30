@@ -2,6 +2,7 @@
 using WebApplication3.Commands;
 using WebApplication3.Mappers;
 using WebApplication3.Repositories;
+using WebApplication3.Validators;
 
 namespace WebApplication3
 {
@@ -32,6 +33,7 @@ namespace WebApplication3
             services.AddScoped<ICreateEmployeeCommand, CreateEmployeeCommand>();
             services.AddScoped<IDbEmployeeMapper, DbEmployeeMapper>();
             services.AddScoped<ICreateEmployeeCommand, CreateEmployeeCommand>();
+            services.AddScoped<ICreateEmployeeValidator, CreateEmployeeRequestValidator>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
