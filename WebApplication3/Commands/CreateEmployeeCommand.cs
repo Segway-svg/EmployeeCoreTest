@@ -31,8 +31,6 @@ namespace WebApplication3.Commands
         {
             OperationResultResponse<int> response = new();
 
-            var employeeId = await _repository.AddEmployeeAsync(_mapper.Map(request));
-
             ValidationResult validationResult = await _validator.ValidateAsync(request);
 
             if (!validationResult.IsValid)
@@ -53,6 +51,8 @@ namespace WebApplication3.Commands
 
                 return result;
             }
+
+            var employeeId = await _repository.AddEmployeeAsync(_mapper.Map(request));
 
             if (employeeId != null)
             {
