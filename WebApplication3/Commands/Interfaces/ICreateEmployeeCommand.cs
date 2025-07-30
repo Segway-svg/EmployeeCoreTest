@@ -1,6 +1,6 @@
 ﻿using WebApplication3.Models.Response;
 
-namespace WebApplication3.Commands
+namespace WebApplication3.Commands.Interfaces
 {
     public interface ICreateEmployeeCommand
     {
