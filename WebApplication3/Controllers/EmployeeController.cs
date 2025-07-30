@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using WebApplication3.Commands;
 using WebApplication3.Models.Response;
 using WebApplication3.Repositories;
+using WebApplication3.Requests;
 
 namespace WebApplication3.Controllers
 {
@@ -49,9 +50,12 @@ namespace WebApplication3.Controllers
         }
 
         [HttpPut("Update/{id}")]
-        public async Task<Employee> GetEmployeesByCompany(int id, [FromBody] Employee employee)
+        public async Task<OperationResultResponse<Employee>> GetEmployeesByCompany(
+            int id, 
+            [FromBody] EditEmployeeRequest employee,
+            [FromServices] IEditEmployeeCommand editEmployeeCommand)
         {
-            var updatedEmployee = await _employeeRepository.UpdateEmployeeAsync(id, employee);
+            var updatedEmployee = await editEmployeeCommand.ExecuteAsync(id, employee);
 
             return updatedEmployee;
         }

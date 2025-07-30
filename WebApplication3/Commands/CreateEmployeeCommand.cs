@@ -1,6 +1,6 @@
 ﻿using FluentValidation.Results;
 using System.Net;
-using WebApplication3.Mappers;
+using WebApplication3.Mappers.CreateMapper;
 using WebApplication3.Models.Response;
 using WebApplication3.Repositories;
 using WebApplication3.Validators;
@@ -10,13 +10,13 @@ namespace WebApplication3.Commands
     public class CreateEmployeeCommand : ICreateEmployeeCommand
     {
         private readonly IHttpContextAccessor _contextAccessor;
-        private readonly IDbEmployeeMapper _mapper;
+        private readonly IDbCreateEmployeeMapper _mapper;
         private readonly IEmployeeRepository _repository;
         private readonly ICreateEmployeeValidator _validator;
 
         public CreateEmployeeCommand(
           IHttpContextAccessor contextAccessor,
-          IDbEmployeeMapper mapper,
+          IDbCreateEmployeeMapper mapper,
           IEmployeeRepository repository,
           ICreateEmployeeValidator validator
             )
@@ -30,8 +30,6 @@ namespace WebApplication3.Commands
         public async Task<OperationResultResponse<int>> ExecuteAsync(CreateEmployeeRequest request)
         {
             OperationResultResponse<int> response = new();
-
-            var employeeId = await _repository.AddEmployeeAsync(_mapper.Map(request));
 
             ValidationResult validationResult = await _validator.ValidateAsync(request);
 
@@ -53,6 +51,8 @@ namespace WebApplication3.Commands
 
                 return result;
             }
+
+            var employeeId = await _repository.AddEmployeeAsync(_mapper.Map(request));
 
             if (employeeId != null)
             {
