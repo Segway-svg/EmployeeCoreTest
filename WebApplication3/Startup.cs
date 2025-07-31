@@ -1,6 +1,7 @@
 ﻿using WebApplication3.Commands;
 using WebApplication3.Commands.Interfaces;
 using WebApplication3.Db;
+using WebApplication3.Mappers;
 using WebApplication3.Mappers.CreateMapper;
 using WebApplication3.Mappers.EditMapper;
 using WebApplication3.Repositories;
@@ -38,6 +39,8 @@ namespace WebApplication3
             services.AddScoped<IDbEditEmployeeMapper, DbEditEmployeeMapper>();
 
             services.AddScoped<ICreateEmployeeValidator, CreateEmployeeRequestValidator>();
+
+            services.AddScoped<IDtoEmployeeMapper, DtoEmployeeMapper>();
         }
 
         public void ConfigureServices(WebApplication app)

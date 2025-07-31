@@ -1,10 +1,11 @@
 ﻿using System.Net;
 using WebApplication3.Commands.Interfaces;
-using WebApplication3.Mappers.CreateMapper;
+using WebApplication3.Mappers;
 using WebApplication3.Mappers.EditMapper;
 using WebApplication3.Models.Response;
 using WebApplication3.Repositories;
 using WebApplication3.Requests;
+using WebApplication3.Responses;
 
 namespace WebApplication3.Commands
 {
@@ -12,22 +13,25 @@ namespace WebApplication3.Commands
     {
         private readonly IHttpContextAccessor _contextAccessor;
         private readonly IDbEditEmployeeMapper _mapper;
+        private readonly IDtoEmployeeMapper _mapperDto;
         private readonly IEmployeeRepository _repository;
 
         public EditEmployeeCommand(
           IHttpContextAccessor contextAccessor,
           IDbEditEmployeeMapper mapper,
+          IDtoEmployeeMapper mapperDto,
           IEmployeeRepository repository
         )
         {
             _contextAccessor = contextAccessor;
             _mapper = mapper;
+            _mapperDto = mapperDto;
             _repository = repository;
         }
 
-        public async Task<OperationResultResponse<Employee>> ExecuteAsync(int id, EditEmployeeRequest request)
+        public async Task<OperationResultResponse<EmployeeResponse>> ExecuteAsync(int id, EditEmployeeRequest request)
         {
-            OperationResultResponse<Employee> response = new();
+            OperationResultResponse<EmployeeResponse> response = new();
 
             var updatedEmployee = await _repository.UpdateEmployeeAsync(id, _mapper.Map(request));
 
@@ -36,7 +40,7 @@ namespace WebApplication3.Commands
                 _contextAccessor.HttpContext.Response.StatusCode = (int)HttpStatusCode.Created;
 
                 response.IsSuccess = true;
-                response.Body = updatedEmployee;
+                response.Body = _mapperDto.Map(updatedEmployee);
             }
             else
             {

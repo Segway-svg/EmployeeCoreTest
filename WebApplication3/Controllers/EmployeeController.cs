@@ -3,6 +3,7 @@ using WebApplication3.Commands.Interfaces;
 using WebApplication3.Models.Response;
 using WebApplication3.Repositories;
 using WebApplication3.Requests;
+using WebApplication3.Responses;
 
 namespace WebApplication3.Controllers
 {
@@ -50,7 +51,7 @@ namespace WebApplication3.Controllers
         }
 
         [HttpPut("Update/{id}")]
-        public async Task<OperationResultResponse<Employee>> GetEmployeesByCompany(
+        public async Task<OperationResultResponse<EmployeeResponse>> GetEmployeesByCompany(
             int id, 
             [FromBody] EditEmployeeRequest employee,
             [FromServices] IEditEmployeeCommand editEmployeeCommand)
