@@ -4,28 +4,48 @@ using WebApplication3.Mappers;
 using WebApplication3.Repositories;
 using WebApplication3.Requests;
 using WebApplication3.Responses;
+using WebApplication3.Validators.Interfaces;
 
 namespace WebApplication3.Commands
 {
     public class EditEmployeeCommand : IEditEmployeeCommand
     {
         private readonly IHttpContextAccessor _contextAccessor;
-        private readonly IDtoEmployeeMapper _mapperDto;
+        private readonly IEditEmployeeValidator _validator;
         private readonly IEmployeeRepository _repository;
 
         public EditEmployeeCommand(
             IHttpContextAccessor contextAccessor,
-            IDtoEmployeeMapper mapperDto,
+            IEditEmployeeValidator validator,
             IEmployeeRepository repository)
         {
             _contextAccessor = contextAccessor;
-            _mapperDto = mapperDto;
+            _validator = validator;
             _repository = repository;
         }
 
         public async Task<OperationResultResponse<bool>> ExecuteAsync(int id, EditEmployeeRequest request)
         {
             var response = new OperationResultResponse<bool>();
+
+            var validationResult = await _validator.ValidateAsync(request);
+
+            if (!validationResult.IsValid)
+            {
+                response.IsSuccess = false;
+
+                response.Errors = validationResult.Errors
+                    .Select(error => new ResponseError
+                    {
+                        Code = (int)HttpStatusCode.BadRequest,
+                        Messages = error.ErrorMessage
+                    })
+                    .ToList();
+                
+                _contextAccessor.HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                
+                return response;
+            }
 
             var employeeToUpdate = new Employee { Id = id };
 
