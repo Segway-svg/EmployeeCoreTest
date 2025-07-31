@@ -6,18 +6,18 @@ namespace WebApplication3.Mappers
 {
     public class DtoEmployeeMapper : IDtoEmployeeMapper
     {
-        public EmployeeResponse Map(Employee editEmployeeRequest)
+        public EmployeeResponse Map(Employee employee)
         {
-            return editEmployeeRequest is null
+            return employee is null
             ? null
             : new EmployeeResponse
             {
-                Name = editEmployeeRequest.Name,
-                Surname = editEmployeeRequest.Surname,
-                Phone = editEmployeeRequest.Phone,
-                CompanyId = editEmployeeRequest.CompanyId,
-                Department = editEmployeeRequest.Department,
-                Passport = editEmployeeRequest.Passport,
+                Name = employee.Name,
+                Surname = employee.Surname,
+                Phone = employee.Phone,
+                CompanyId = employee.CompanyId,
+                Department = employee.Department,
+                Passport = employee.Passport,
             };
         }
     }

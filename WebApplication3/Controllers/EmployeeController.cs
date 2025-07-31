@@ -35,9 +35,11 @@ namespace WebApplication3.Controllers
         }
 
         [HttpGet("GetByCompany/{companyId}")]
-        public async Task<IEnumerable<Employee>> GetEmployeesByCompany(int companyId)
+        public async Task<ActionResult<OperationResultResponse<List<EmployeeResponse>>>> GetEmployeesByCompany(
+            int companyId,
+            [FromServices] IGetEmployeesByCompanyCommand getEmployeesByCompanyCommand)
         {
-            var employees = await _employeeRepository.GetEmployeesByCompanyAsync(companyId);
+            var employees = await getEmployeesByCompanyCommand.ExecuteAsync(companyId);
 
             return employees;
         }
