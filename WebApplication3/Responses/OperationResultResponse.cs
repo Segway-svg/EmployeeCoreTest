@@ -1,4 +1,4 @@
-﻿namespace WebApplication3.Models.Response
+﻿namespace WebApplication3.Responses
 {
     public class OperationResultResponse<T>
     {

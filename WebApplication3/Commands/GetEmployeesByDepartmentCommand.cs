@@ -3,17 +3,16 @@ using WebApplication3.Commands.Interfaces;
 using WebApplication3.Mappers;
 using WebApplication3.Repositories;
 using WebApplication3.Responses;
-using WebApplication3.Validators;
 
 namespace WebApplication3.Commands
 {
-    public class GetEmployeesByCompanyCommand : IGetEmployeesByCompanyCommand
+    public class GetEmployeesByDepartmentCommand : IGetEmployeesByDepartmentCommand
     {
         private readonly IHttpContextAccessor _contextAccessor;
         private readonly IEmployeeRepository _repository;
         private readonly IDtoEmployeeMapper _mapperDto;
 
-        public GetEmployeesByCompanyCommand(
+        public GetEmployeesByDepartmentCommand(
           IHttpContextAccessor contextAccessor,
           IDtoEmployeeMapper mapperDto,
           IEmployeeRepository repository
@@ -23,9 +22,9 @@ namespace WebApplication3.Commands
             _mapperDto = mapperDto;
             _repository = repository;
         }
-        public async Task<OperationResultResponse<List<EmployeeResponse>>> ExecuteAsync(int companyId)
+        public async Task<OperationResultResponse<List<EmployeeResponse>>> ExecuteAsync(string departmentName)
         {
-            var employees = await _repository.GetEmployeesByCompanyAsync(companyId);
+            var employees = await _repository.GetEmployeesByDepartmentAsync(departmentName);
 
             if (employees == null || !employees.Any())
             {
@@ -39,7 +38,7 @@ namespace WebApplication3.Commands
                         new ResponseError
                         {
                             Code = (int)HttpStatusCode.NotFound,
-                            Messages = "Сотрудники для указанной компании не найдены",
+                            Messages = "Сотрудники для указанного департамента не найдены",
                         }
                     }
                 };

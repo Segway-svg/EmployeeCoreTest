@@ -35,6 +35,7 @@ namespace WebApplication3
             services.AddScoped<ICreateEmployeeCommand, CreateEmployeeCommand>();
             services.AddScoped<IEditEmployeeCommand, EditEmployeeCommand>();
             services.AddScoped<IGetEmployeesByCompanyCommand, GetEmployeesByCompanyCommand>();
+            services.AddScoped<IGetEmployeesByDepartmentCommand, GetEmployeesByDepartmentCommand>();
             services.AddScoped<IDeleteEmployeeCommand, DeleteEmployeeCommand>();
 
             services.AddScoped<IDbCreateEmployeeMapper, DbCreateEmployeeMapper>();

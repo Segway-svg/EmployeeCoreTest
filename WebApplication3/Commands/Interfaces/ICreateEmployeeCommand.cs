@@ -1,4 +1,4 @@
-﻿using WebApplication3.Models.Response;
+﻿using WebApplication3.Responses;
 
 namespace WebApplication3.Commands.Interfaces
 {
