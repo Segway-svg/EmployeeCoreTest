@@ -1,13 +1,14 @@
 ﻿using FluentValidation;
+using WebApplication3.Requests;
 using WebApplication3.Validators.Interfaces;
 
 namespace WebApplication3.Validators
 {
-    public class CreateEmployeeRequestValidator
-        : AbstractValidator<CreateEmployeeRequest>,
-          ICreateEmployeeValidator
+    public class EditEmployeeValidator
+    : AbstractValidator<EditEmployeeRequest>,
+      IEditEmployeeValidator
     {
-        public CreateEmployeeRequestValidator()
+        public EditEmployeeValidator()
         {
             RuleFor(x => x.Name)
                 .NotEmpty().WithMessage("Имя обязательно")

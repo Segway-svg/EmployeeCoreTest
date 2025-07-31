@@ -50,7 +50,7 @@ namespace WebApplication3.Controllers
         }
 
         [HttpPut("Update/{id}")]
-        public async Task<OperationResultResponse<EmployeeResponse>> EditEmployee(
+        public async Task<OperationResultResponse<bool>> EditEmployee(
             int id, 
             [FromBody] EditEmployeeRequest employee,
             [FromServices] IEditEmployeeCommand editEmployeeCommand)

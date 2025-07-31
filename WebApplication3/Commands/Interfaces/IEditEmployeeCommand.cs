@@ -5,6 +5,6 @@ namespace WebApplication3.Commands.Interfaces
 {
     public interface IEditEmployeeCommand
     {
-        Task<OperationResultResponse<EmployeeResponse>> ExecuteAsync(int id, EditEmployeeRequest request);
+        Task<OperationResultResponse<bool>> ExecuteAsync(int id, EditEmployeeRequest request);
     }
 }

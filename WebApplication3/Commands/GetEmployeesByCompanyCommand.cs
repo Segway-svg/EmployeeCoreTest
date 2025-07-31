@@ -3,7 +3,6 @@ using WebApplication3.Commands.Interfaces;
 using WebApplication3.Mappers;
 using WebApplication3.Repositories;
 using WebApplication3.Responses;
-using WebApplication3.Validators;
 
 namespace WebApplication3.Commands
 {
