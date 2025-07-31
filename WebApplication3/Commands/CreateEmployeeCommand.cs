@@ -4,7 +4,7 @@ using WebApplication3.Commands.Interfaces;
 using WebApplication3.Mappers.CreateMapper;
 using WebApplication3.Repositories;
 using WebApplication3.Responses;
-using WebApplication3.Validators;
+using WebApplication3.Validators.Interfaces;
 
 namespace WebApplication3.Commands
 {
@@ -72,7 +72,7 @@ namespace WebApplication3.Commands
                     Messages = "Ошибка добавления элемента",
                 });
 
-                _contextAccessor.HttpContext.Response.StatusCode = (int)HttpStatusCode.Created;
+                _contextAccessor.HttpContext.Response.StatusCode = (int)HttpStatusCode.NotModified;
             }
 
             return response;
