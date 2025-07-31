@@ -27,11 +27,11 @@ namespace WebApplication3.Controllers
         }
 
         [HttpDelete("Delete")]
-        public async Task<bool> DeleteEmployee([FromBody] int id)
+        public async Task<OperationResultResponse<bool>> DeleteEmployee(
+            [FromBody] int id,
+            [FromServices] IDeleteEmployeeCommand deleteEmployeeCommand)
         {
-            var isDeleted = await _employeeRepository.DeleteEmployeeAsync(id);
-
-            return isDeleted;
+            return await deleteEmployeeCommand.ExecuteAsync(id);
         }
 
         [HttpGet("GetByCompany/{companyId}")]

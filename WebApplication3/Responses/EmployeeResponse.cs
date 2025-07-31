@@ -5,6 +5,7 @@ namespace WebApplication3.Responses
 {
     public class EmployeeResponse
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Phone { get; set; }

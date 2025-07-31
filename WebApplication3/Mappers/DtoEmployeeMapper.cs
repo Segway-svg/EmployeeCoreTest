@@ -1,6 +1,4 @@
-﻿using Azure.Core;
-using WebApplication3.Requests;
-using WebApplication3.Responses;
+﻿using WebApplication3.Responses;
 
 namespace WebApplication3.Mappers
 {
@@ -12,6 +10,7 @@ namespace WebApplication3.Mappers
             ? null
             : new EmployeeResponse
             {
+                Id = employee.Id,
                 Name = employee.Name,
                 Surname = employee.Surname,
                 Phone = employee.Phone,
