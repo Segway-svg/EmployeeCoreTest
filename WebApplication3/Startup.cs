@@ -1,4 +1,4 @@
-﻿using WebApplication3.Commands;
+using WebApplication3.Commands;
 using WebApplication3.Commands.Interfaces;
 using WebApplication3.Db;
 using WebApplication3.Mappers;
