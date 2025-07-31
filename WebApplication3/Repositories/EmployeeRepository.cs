@@ -4,9 +4,10 @@ using System.Data;
 
 namespace WebApplication3.Repositories
 {
-    public class EmployeeRepository : IEmployeeRepository
+    public class EmployeeRepository : IEmployeeRepository, IDisposable
     {
         private readonly SqlConnection _connection;
+        private bool _disposed = false;
 
         public EmployeeRepository(SqlConnection connection)
         {
@@ -209,6 +210,29 @@ namespace WebApplication3.Repositories
         {
             if (_connection.State != ConnectionState.Open)
                 await _connection.OpenAsync();
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!_disposed)
+            {
+                if (disposing)
+                {
+                    if (_connection != null)
+                    {
+                        _connection.Close();
+                        _connection.Dispose();
+                    }
+                }
+
+                _disposed = true;
+            }
         }
     }
 }
