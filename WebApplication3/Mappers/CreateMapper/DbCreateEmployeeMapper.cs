@@ -1,6 +1,6 @@
-﻿namespace WebApplication3.Mappers
+﻿namespace WebApplication3.Mappers.CreateMapper
 {
-    public class DbEmployeeMapper : IDbEmployeeMapper
+    public class DbCreateEmployeeMapper : IDbCreateEmployeeMapper
     {
         public Employee Map(CreateEmployeeRequest createEmployeeRequest)
         {

@@ -1,6 +1,7 @@
 ﻿using FluentValidation.Results;
 using System.Net;
-using WebApplication3.Mappers;
+using WebApplication3.Commands.Interfaces;
+using WebApplication3.Mappers.CreateMapper;
 using WebApplication3.Models.Response;
 using WebApplication3.Repositories;
 using WebApplication3.Validators;
@@ -10,13 +11,13 @@ namespace WebApplication3.Commands
     public class CreateEmployeeCommand : ICreateEmployeeCommand
     {
         private readonly IHttpContextAccessor _contextAccessor;
-        private readonly IDbEmployeeMapper _mapper;
+        private readonly IDbCreateEmployeeMapper _mapper;
         private readonly IEmployeeRepository _repository;
         private readonly ICreateEmployeeValidator _validator;
 
         public CreateEmployeeCommand(
           IHttpContextAccessor contextAccessor,
-          IDbEmployeeMapper mapper,
+          IDbCreateEmployeeMapper mapper,
           IEmployeeRepository repository,
           ICreateEmployeeValidator validator
             )

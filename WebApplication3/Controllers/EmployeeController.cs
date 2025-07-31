@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
-using WebApplication3.Commands;
+using WebApplication3.Commands.Interfaces;
 using WebApplication3.Models.Response;
 using WebApplication3.Repositories;
+using WebApplication3.Requests;
+using WebApplication3.Responses;
 
 namespace WebApplication3.Controllers
 {
@@ -33,9 +35,11 @@ namespace WebApplication3.Controllers
         }
 
         [HttpGet("GetByCompany/{companyId}")]
-        public async Task<IEnumerable<Employee>> GetEmployeesByCompany(int companyId)
+        public async Task<ActionResult<OperationResultResponse<List<EmployeeResponse>>>> GetEmployeesByCompany(
+            int companyId,
+            [FromServices] IGetEmployeesByCompanyCommand getEmployeesByCompanyCommand)
         {
-            var employees = await _employeeRepository.GetEmployeesByCompanyAsync(companyId);
+            var employees = await getEmployeesByCompanyCommand.ExecuteAsync(companyId);
 
             return employees;
         }
@@ -49,9 +53,12 @@ namespace WebApplication3.Controllers
         }
 
         [HttpPut("Update/{id}")]
-        public async Task<Employee> GetEmployeesByCompany(int id, [FromBody] Employee employee)
+        public async Task<OperationResultResponse<EmployeeResponse>> GetEmployeesByCompany(
+            int id, 
+            [FromBody] EditEmployeeRequest employee,
+            [FromServices] IEditEmployeeCommand editEmployeeCommand)
         {
-            var updatedEmployee = await _employeeRepository.UpdateEmployeeAsync(id, employee);
+            var updatedEmployee = await editEmployeeCommand.ExecuteAsync(id, employee);
 
             return updatedEmployee;
         }
