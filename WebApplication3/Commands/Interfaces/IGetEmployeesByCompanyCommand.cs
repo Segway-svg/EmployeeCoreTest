@@ -4,6 +4,6 @@ namespace WebApplication3.Commands.Interfaces
 {
     public interface IGetEmployeesByCompanyCommand
     {
-        Task<OperationResultResponse<List<EmployeeResponse>>> ExecuteAsync(int companyId);
+        Task<OperationResultResponse<IEnumerable<EmployeeResponse>>> ExecuteAsync(int companyId);
     }
 }

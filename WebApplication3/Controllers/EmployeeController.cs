@@ -34,7 +34,7 @@ namespace WebApplication3.Controllers
         }
 
         [HttpGet("GetByCompany/{companyId}")]
-        public async Task<OperationResultResponse<List<EmployeeResponse>>> GetEmployeesByCompany(
+        public async Task<OperationResultResponse<IEnumerable<EmployeeResponse>>> GetEmployeesByCompany(
             int companyId,
             [FromServices] IGetEmployeesByCompanyCommand getEmployeesByCompanyCommand)
         {
@@ -42,7 +42,7 @@ namespace WebApplication3.Controllers
         }
 
         [HttpGet("GetByDepartment/{departmentName}")]
-        public async Task<OperationResultResponse<List<EmployeeResponse>>> GetEmployeesByDepartment(
+        public async Task<OperationResultResponse<IEnumerable<EmployeeResponse>>> GetEmployeesByDepartment(
             string departmentName,
             [FromServices] IGetEmployeesByDepartmentCommand getEmployeesByDepartmentCommand)
         {

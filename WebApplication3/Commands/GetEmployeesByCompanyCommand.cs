@@ -23,7 +23,7 @@ namespace WebApplication3.Commands
             _mapperDto = mapperDto;
             _repository = repository;
         }
-        public async Task<OperationResultResponse<List<EmployeeResponse>>> ExecuteAsync(int companyId)
+        public async Task<OperationResultResponse<IEnumerable<EmployeeResponse>>> ExecuteAsync(int companyId)
         {
             var employees = await _repository.GetEmployeesByCompanyAsync(companyId);
 
@@ -31,7 +31,7 @@ namespace WebApplication3.Commands
             {
                 _contextAccessor.HttpContext.Response.StatusCode = (int)HttpStatusCode.NotFound;
 
-                return new OperationResultResponse<List<EmployeeResponse>>
+                return new OperationResultResponse<IEnumerable<EmployeeResponse>>
                 {
                     IsSuccess = false,
                     Errors = new List<ResponseError>
@@ -49,7 +49,7 @@ namespace WebApplication3.Commands
 
             _contextAccessor.HttpContext.Response.StatusCode = (int)HttpStatusCode.OK;
 
-            return new OperationResultResponse<List<EmployeeResponse>>
+            return new OperationResultResponse<IEnumerable<EmployeeResponse>>
             {
                 IsSuccess = true,
                 Body = employeesResponse
