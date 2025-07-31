@@ -37,18 +37,7 @@ DI и прочие настройки проекта располагаются 
 
 Структура таблицы для теста:
 
-┌───────────────────────┐       ┌───────────────────────┐
-│     DepartmentsDb     │       │       EmployeesDb     │
-├───────────────────────┤       ├───────────────────────┤
-│ PK │ Id           INT ├───────┼ FK │ DepartmentId INT │
-│    │ Name     NVARCHAR│       │ PK │ Id        INT    │
-│    │ Phone    NVARCHAR│       │    │ Name    NVARCHAR │
-└───────────────────────┘       │    │ Surname NVARCHAR │
-                                │    │ Phone   NVARCHAR │
-                                │    │ CompanyId INT    │
-                                │    │ PassportType     │
-                                │    │ PassportNumber   │
-                                └───────────────────────┘
+<img width="500" height="314" alt="image" src="https://github.com/user-attachments/assets/50dfeab1-e2ff-4a67-9814-87acf1a29698" />
 
 CREATE TABLE EmployeesDb (
     Id INT PRIMARY KEY IDENTITY(1,1),
