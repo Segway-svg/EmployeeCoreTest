@@ -35,7 +35,7 @@ namespace WebApplication3.Controllers
         }
 
         [HttpGet("GetByCompany/{companyId}")]
-        public async Task<ActionResult<OperationResultResponse<List<EmployeeResponse>>>> GetEmployeesByCompany(
+        public async Task<OperationResultResponse<List<EmployeeResponse>>> GetEmployeesByCompany(
             int companyId,
             [FromServices] IGetEmployeesByCompanyCommand getEmployeesByCompanyCommand)
         {
