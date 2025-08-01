@@ -1,5 +1,9 @@
 # Важная информация
 
+Для запуска приложения необходимо установить следующие NUGET-пакеты:
+
+<img width="1009" height="464" alt="image" src="https://github.com/user-attachments/assets/73859e16-6099-42ba-9a45-1fd0323bc49c" />
+
 Протестировать приложение можно через Swagger:
 
 <img width="1689" height="398" alt="image" src="https://github.com/user-attachments/assets/dd67eb10-dac8-4a57-b40d-28e26cce33be" />
