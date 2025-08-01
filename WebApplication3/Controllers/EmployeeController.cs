@@ -10,13 +10,6 @@ namespace WebApplication3.Controllers
     [Route("[controller]")]
     public class EmployeeController : ControllerBase
     {
-        private readonly IEmployeeRepository _employeeRepository;
-
-        public EmployeeController(IEmployeeRepository employeeRepository)
-        {
-            _employeeRepository = employeeRepository;
-        }
-
         [HttpPost("Create")]
         public async Task<OperationResultResponse<int>> AddEmployee(
             [FromBody] CreateEmployeeRequest employee,
